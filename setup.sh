@@ -27,9 +27,17 @@ echo "*********** Preparing SQL Server instance features: Contained databases " 
 #
 file="/var/opt/mssql/data/Pubs.mdf"
 
+
+
 if [ ! -f "$file" ]
 then
 	echo "*********** Restoring databases: WideWorldImporters, Adventureworks, tpcc ..." | tee -a ./config.log
+	touch /var/opt/mssql/data/WideWorldImporters.mdf 
+    touch /var/opt/mssql/data/WideWorldImporters_UserData.ndf
+    touch /var/opt/mssql/data/WideWorldImporters.ldf
+	touch /var/opt/mssql/data/WideWorldImportersDW.mdf
+	touch /var/opt/mssql/data/WideWorldImportersDW_UserData.ndf
+	touch /var/opt/mssql/data/WideWorldImportersDW.ldf
 	/opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P $MSSQL_SA_PASSWORD -d master -i /usr/config/setup.restore.sql
 
 	case $INCLUDE_ALL_DATABASES in	
@@ -43,6 +51,9 @@ then
 else
 	case $FORCE_ATTACH_IF_MDF_EXISTS in	
 	1)	echo "*********** Attaching previously restored databases..." | tee -a ./config.log
+		touch /var/opt/mssql/data/WideWorldImporters.mdf
+		touch /var/opt/mssql/data/WideWorldImporters_UserData.ndf
+		touch /var/opt/mssql/data/WideWorldImporters.ldf
 		/opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P $MSSQL_SA_PASSWORD -d master -i /usr/config/setup.attach.sql
 		
 		case $INCLUDE_ALL_DATABASES in	
