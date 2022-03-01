@@ -38,6 +38,14 @@ then
 	touch /var/opt/mssql/data/WideWorldImportersDW.mdf
 	touch /var/opt/mssql/data/WideWorldImportersDW_UserData.ndf
 	touch /var/opt/mssql/data/WideWorldImportersDW.ldf
+	touch /var/opt/mssql/data/Pubs.mdf
+	touch /var/opt/mssql/data/Pubs_log.ldf
+	touch /var/opt/mssql/data/Northwind.mdf
+	touch /var/opt/mssql/data/Northwind_log.ldf
+	touch /var/opt/mssql/data/AdventureWorks2017.mdf
+	touch /var/opt/mssql/data/AdventureWorks2017_log.ldf
+	touch /var/opt/mssql/data/AdventureWorksDW2017.mdf
+	touch /var/opt/mssql/data/dventureWorksDW2017_log.ldf
 	/opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P $MSSQL_SA_PASSWORD -d master -i /usr/config/setup.restore.sql
 
 	case $INCLUDE_ALL_DATABASES in	
@@ -51,9 +59,20 @@ then
 else
 	case $FORCE_ATTACH_IF_MDF_EXISTS in	
 	1)	echo "*********** Attaching previously restored databases..." | tee -a ./config.log
-		touch /var/opt/mssql/data/WideWorldImporters.mdf
+		touch /var/opt/mssql/data/WideWorldImporters.mdf 
 		touch /var/opt/mssql/data/WideWorldImporters_UserData.ndf
 		touch /var/opt/mssql/data/WideWorldImporters.ldf
+		touch /var/opt/mssql/data/WideWorldImportersDW.mdf
+		touch /var/opt/mssql/data/WideWorldImportersDW_UserData.ndf
+		touch /var/opt/mssql/data/WideWorldImportersDW.ldf
+		touch /var/opt/mssql/data/Pubs.mdf
+		touch /var/opt/mssql/data/Pubs_log.ldf
+		touch /var/opt/mssql/data/Northwind.mdf
+		touch /var/opt/mssql/data/Northwind_log.ldf
+		touch /var/opt/mssql/data/AdventureWorks2017.mdf
+		touch /var/opt/mssql/data/AdventureWorks2017_log.ldf
+		touch /var/opt/mssql/data/AdventureWorksDW2017.mdf
+		touch /var/opt/mssql/data/dventureWorksDW2017_log.ldf
 		/opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P $MSSQL_SA_PASSWORD -d master -i /usr/config/setup.attach.sql
 		
 		case $INCLUDE_ALL_DATABASES in	

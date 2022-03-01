@@ -83,6 +83,7 @@ RUN chmod +x setup.sh
 RUN chmod +x entrypoint.sh
 
 # This entrypoint start sql server, restores data and waits infinitely
-ENTRYPOINT ["./entrypoint.sh"]
+# RUN dos2unix /entrypoint.sh 
+ENTRYPOINT ["sh","./entrypoint.sh"]
 
 CMD ["sleep infinity"]
