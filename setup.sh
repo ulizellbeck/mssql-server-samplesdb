@@ -45,7 +45,7 @@ then
 	touch /var/opt/mssql/data/AdventureWorks2017.mdf
 	touch /var/opt/mssql/data/AdventureWorks2017_log.ldf
 	touch /var/opt/mssql/data/AdventureWorksDW2017.mdf
-	touch /var/opt/mssql/data/dventureWorksDW2017_log.ldf
+	touch /var/opt/mssql/data/AdventureWorksDW2017_log.ldf
 	/opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P $MSSQL_SA_PASSWORD -d master -i /usr/config/setup.restore.sql
 
 	case $INCLUDE_ALL_DATABASES in	
@@ -72,7 +72,7 @@ else
 		touch /var/opt/mssql/data/AdventureWorks2017.mdf
 		touch /var/opt/mssql/data/AdventureWorks2017_log.ldf
 		touch /var/opt/mssql/data/AdventureWorksDW2017.mdf
-		touch /var/opt/mssql/data/dventureWorksDW2017_log.ldf
+		touch /var/opt/mssql/data/AdventureWorksDW2017_log.ldf
 		/opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P $MSSQL_SA_PASSWORD -d master -i /usr/config/setup.attach.sql
 		
 		case $INCLUDE_ALL_DATABASES in	
